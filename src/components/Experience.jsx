@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 function Experience() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile] = useState(() => (window.innerWidth < 460 ? true : false));
   const [daymap, cloudMap, bump] = useTexture([
     'textures/daymap.jpg',
     'textures/cloudmap.jpg',
@@ -18,12 +18,6 @@ function Experience() {
     cloudRef.current.rotation.y = -state.clock.getElapsedTime() * 0.01;
     earthRef.current.rotation.y = state.clock.getElapsedTime() * 0.07;
   });
-
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setIsMobile(true);
-    }
-  }, []);
 
   return (
     <>
